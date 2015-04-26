@@ -5,7 +5,7 @@
         .module('app', [
             'app.core',
             'app.home',
-            // 'app.countries'
+            'app.countries'
         ])
         .config(function($locationProvider, $routeProvider) {
             // $locationProvider.hashPrefix('!');

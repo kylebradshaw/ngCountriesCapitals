@@ -8,6 +8,7 @@
     HomeController.$inject = ['$scope'];
 
     function HomeController($scope) {
+        $scope.pageClass = "home";
         $scope.content = "What an epic homepage!";
     }
 }());
