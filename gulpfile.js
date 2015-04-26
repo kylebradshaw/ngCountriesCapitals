@@ -10,6 +10,14 @@ var minifyCss = require('gulp-minify-css');
 var rev = require('gulp-rev');
 
 var paths = {
+    scripts: [ 'app/**/*.js', '!app/bower_components/**/*.js' ],
+    html: [
+      './app/**/*.html',
+      '!./app/index.html',
+      '!./app/bower_components/**/*.html'
+    ],
+    index: './app/index.html',
+    build: './build/',
     styles: {
         src: './app/assets/styles',
         files: './app/assets/styles/*.scss',
@@ -61,18 +69,25 @@ gulp.task('sass', function (){
 });
 
 gulp.task('connect', function() {
-  connect.server();
+    connect.server({
+        root: 'app/',
+    });
 });
 
 //figure out later
-gulp.task('copy', function() {
-  gulp.src(['./app/**/*.html', '!./app/index.html'], {base: './app'})
-  .pipe(gulp.dest('build/'));
+// gulp.task('copy', function() {
+//   gulp.src(['./app/**/*.html', '!./app/index.html'], {base: './app'})
+//   .pipe(gulp.dest('build/'));
+// });
+gulp.task('copy', [ 'clean' ], function() {
+    gulp.src( paths.html )
+        .pipe(gulp.dest('build/'));
 });
 
 
+
 gulp.task('usemin', function () {
-  return gulp.src('./*.html')
+  return gulp.src('./app/*.html')
       .pipe(usemin({
         css: [minifyCss(), 'concat'],
         html: [minifyHtml({empty: true})],
@@ -81,7 +96,12 @@ gulp.task('usemin', function () {
       .pipe(gulp.dest('build/'));
 });
 
-gulp.task('build', ['copy', 'usemin']);
+gulp.task('clean', function(){
+  gulp.src( paths.build, { read: false } )
+    .pipe(clean());
+});
+
+gulp.task('build', ['sass', 'copy', 'usemin']);
 
 // This is the default task - which is run when `gulp` is run
 // The tasks passed in as an array are run before the tasks within the function
