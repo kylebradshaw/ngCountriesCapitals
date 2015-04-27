@@ -1,1 +1,27 @@
-<p>{{content}}</p>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>Country Code</th>
+                <th>Capital</th>
+                <th>Area in km<sup>2</sup></th>
+                <th>Population</th>
+                <th>Continent</th>
+            </tr>
+            <tr ng-repeat="country in countryList">
+                <td><a href="#/countries/{{country.countryName | slugify}}/capital">{{country.countryName}}</td>
+                <td>{{country.countryCode}}</td>
+                <td>{{country.capital}}</td>
+                <td>{{country.areaInSqKm | humanNumber}}</td>
+                <td>{{country.population | humanNumber}}</td>
+                <td>{{country.continent}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <a class="btn btn-primary" href="#/">Home</a>
+    </div>
+</div>

@@ -10,8 +10,8 @@
     /* @ngInject */
     function appRun($routeProvider) {
         $routeProvider.when("/countries", {
-          templateUrl : "./countries/countries.html",
-          controller : 'CountriesController'
+            templateUrl: "./countries/countries.html",
+            controller: 'CountriesController',
         });
     }
 })();

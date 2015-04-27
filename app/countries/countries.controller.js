@@ -5,12 +5,28 @@
         .module('app.countries')
         .controller('CountriesController', CountriesController);
 
-    CountriesController.$inject = ['$scope', 'dataservice'];
+    CountriesController.$inject = ['$q', '$scope', 'dataservice'];
 
-    function CountriesController($scope, dataservice) {
+    function CountriesController($q, $scope, dataservice) {
         $scope.pageClass = "countries";
-        $scope.content = 'countries list here';
-        var data = dataservice.getCountries();
-        console.log(data, 'THE DATA');
+        $scope.countryList = [];
+
+        activate();
+
+        function activate() {
+            var promises = [getCountries()];
+            return $q.all(promises).then(function(){
+                console.log('data retrieved');
+                console.log($scope.countryList, 'countries');
+            })
+        }
+
+        function getCountries() {
+            return dataservice.getCountries().then(function (data) {
+                $scope.countryList = data.geonames;
+                return $scope.countryList;
+            });
+        }
+
     }
 }());

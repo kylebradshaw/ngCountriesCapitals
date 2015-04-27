@@ -2,14 +2,15 @@
     'use strict';
 
     angular
-        .module('app.admin')
-        .run(appRun);
+        .module('app.countries')
+        .config(appRun);
 
     appRun.$inject = ['$routeProvider'];
+
     /* @ngInject */
     function appRun($routeProvider) {
         $routeProvider.when("/countries/:country/capital", {
-          templateUrl : "./coutries/capital.html",
+          templateUrl : "./countries/capital.html",
           controller : 'CapitalController',
           // resolve : {
           //   cityDetails : [
@@ -23,3 +24,15 @@
         });
     }
 })();
+
+
+// resolve: {
+//     city: function(owmCities, $route, $location) {
+//         var city = $route.current.params.city;
+//         if (owmCities.indexOf(city) == -1) {
+//             $location.path('/error');
+//             return;
+//         }
+//         return city;
+//     }
+// }
