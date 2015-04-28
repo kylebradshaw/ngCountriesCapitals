@@ -5,7 +5,7 @@
         .module('app.core')
         .factory('dataservice', dataservice);
 
-    dataservice.$inject = ['$http', '$q', 'API_PREFIX', 
+    dataservice.$inject = ['$http', '$q', 'API_PREFIX',
         'API_AUTH', 'API_COUNTRY_INFO', 'API_SEARCH'];
 
     /* @ngInject */
@@ -42,6 +42,25 @@
                     cache: true,
                     method: 'GET',
                     url: API_PREFIX + API_SEARCH + '?name_equals=' + name + '&' + API_AUTH
+                })
+                .then(success)
+                .catch(fail);
+
+            function success(response) {
+                return response.data;
+            }
+
+            function fail(error) {
+                var msg = 'query for people failed. ' + error.data.description;
+                return $q.reject(msg);
+            }
+        }
+
+        function getNeighbours(id) {
+            return $http({
+                    cache: true,
+                    method: 'GET',
+                    url: API_PREFIX + API_NEIGHBOURS + '?geonameId=' + id + '&' + API_AUTH
                 })
                 .then(success)
                 .catch(fail);

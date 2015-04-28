@@ -5,7 +5,8 @@
         .module('app', [
             'app.core',
             'app.home',
-            'app.countries'
+            'app.countries',
+            'app.navigation'
         ])
         .run(['$rootScope', '$location', '$timeout', function($rootScope, $location, $timeout) {
             $rootScope.$on('$routeChangeError', function() {

@@ -1,6 +1,6 @@
 (function(){
     'use strict';
-    
+
     angular
         .module('app.countries')
         .controller('CapitalController', CapitalController);
@@ -13,6 +13,9 @@
         $scope.content = 'capital info here';
 
         activate();
+
+        //rethink this activate()
+        // do a request for getcountry, get geonameId, pass that to getNeighbours(), do whatever's next
 
         function activate() {
             var promises = [getCountry()];

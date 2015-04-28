@@ -5,14 +5,9 @@
 <pre>
 {{countryData | json}}
 </pre>
+    <div ng-if="countryData.countryCode" class="country-image"
+        ng-style="{'background-image':'url(http://www.geonames.org/flags/m/{{countryData.countryCode | lowercase}}.png)','background-repeat':'repeat'}">
+        <img ng-src="http://www.geonames.org/img/country/250/{{countryData.countryCode}}.png">
     </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-12">
-        <div class="btn-group">
-          <button ng-click="goHome()" type="button" class="btn btn-default">Home</button>
-          <button ng-click="goCountries()" type="button" class="btn btn-default">Browse Countries</button>
-        </div>
     </div>
 </div>
