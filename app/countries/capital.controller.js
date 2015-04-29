@@ -8,28 +8,38 @@
     CapitalController.$inject = ['$q', '$scope', '$routeParams', 'dataservice'];
 
     function CapitalController($q, $scope, $routeParams, dataservice) {
-        $scope.countryData = {};
+        $scope.country = {};
         // $scope.country = $routeParams.country;
-        $scope.content = 'capital info here';
 
-        activate();
+        // activate();
 
-        //rethink this activate()
+        // function activate() {
+        //     var promises = [getCountryData()];
+        //     return $q.all(promises).then(function(){
+        //         console.log('data retrieved');
+        //         console.log($scope.countryData, 'countryData');
+        //     });
+        // }
+        // function getCountry() {
+        //     return dataservice.getCountry($routeParams.country).then(function (data) {
+        //         $scope.countryData = data.geonames[0];
+        //         return $scope.countryData;
+        //     });
+        // }
+
+        getCountryData();
+
         // do a request for getcountry, get geonameId, pass that to getNeighbours(), do whatever's next
-
-        function activate() {
-            var promises = [getCountry()];
-            return $q.all(promises).then(function(){
-                console.log('data retrieved');
-                console.log($scope.countryData, 'countryData');
-            })
+        function getCountryData() {
+            dataservice.getCountry($routeParams.country)
+                .then(function (data) {
+                    $scope.country = data.geonames[0];
+                    dataservice.getNeighbours(data.geonames[0].geonameId)
+                        .then(function(data){
+                            $scope.neighbourData = data.geonames;
+                        });
+                })
         }
 
-        function getCountry() {
-            return dataservice.getCountry($routeParams.country).then(function (data) {
-                $scope.countryData = data.geonames[0];
-                return $scope.countryData;
-            });
-        }
     }
 }());

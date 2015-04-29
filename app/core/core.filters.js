@@ -5,7 +5,9 @@
         .module('app.core')
         .filter('humanNumber', function() {
             return function(input) {
-                return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                if (input !== undefined) {
+                    return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
             }
         })
         .filter('slugify', function() {

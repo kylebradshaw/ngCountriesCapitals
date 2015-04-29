@@ -1,13 +1,41 @@
 <div class="row">
     <div class="col-sm-12">
-        <h2>{{countryData.countryName}}</h2>
-<p>{{content}}</p>
-<pre>
-{{countryData | json}}
-</pre>
-    <div ng-if="countryData.countryCode" class="country-image"
-        ng-style="{'background-image':'url(http://www.geonames.org/flags/m/{{countryData.countryCode | lowercase}}.png)','background-repeat':'repeat'}">
-        <img ng-src="http://www.geonames.org/img/country/250/{{countryData.countryCode}}.png">
-    </div>
+        <h2>{{country.countryName}}</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <dl>
+                    <dt>Population of Country</dt>
+                    <dd>{{country.population | humanNumber}}</dd>
+                    <dt>Area km<sup>2</sup></dt>
+                    <dd></dd>
+                    <!-- <dt>{{country.areaInSqKm | humanNumber}}</dt> -->
+                    <dt>Capital</dt>
+                    <dd>{{country.capital}}</dd>
+                    <dt>Population of Capital</dt>
+                    <dd></dd>
+                    <dt>Lat / Lng</dt>
+                    <dd><a target="_blank" ng-href="https://www.google.com/maps/place/{{country.lat}}°00'00.0%22N+{{country.lng}}°00'00.0%22E">{{country.lng}}°, {{country.lat}}°</a></dd>
+                    <dt>{{results.length}} neighbours</dt>
+                    <dd>
+                        <ul class="neighbours">
+                            <li ng-repeat="country in neighbourData | filter:query as results">
+                                <a href="#/countries/{{country.countryName | slugify}}/capital">
+                                    {{country.countryName}}
+                                </a>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-sm-6">
+                <div ng-if="country.countryCode" class="country-image" ng-style="{'background-image':'url(http://www.geonames.org/flags/m/{{country.countryCode | lowercase}}.png)','background-repeat':'repeat'}">
+                    <img ng-src="http://www.geonames.org/img/country/250/{{country.countryCode}}.png">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<pre>
+{{country | json}}
+{{neighbourData | json}}
+</pre>

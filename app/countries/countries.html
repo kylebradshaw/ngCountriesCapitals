@@ -10,7 +10,11 @@
                 <th>Continent</th>
             </tr>
             <tr ng-repeat="country in countryList">
-                <td><a href="#/countries/{{country.countryName | slugify}}/capital">{{country.countryName}}</td>
+                <td>
+                    <a href="#/countries/{{country.countryName | slugify}}/capital">
+                        {{country.countryName}}
+                    </a>
+                </td>
                 <td>{{country.countryCode}}</td>
                 <td>{{country.capital}}</td>
                 <td>{{country.areaInSqKm | humanNumber}}</td>

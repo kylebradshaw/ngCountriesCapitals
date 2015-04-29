@@ -6,14 +6,15 @@
         .factory('dataservice', dataservice);
 
     dataservice.$inject = ['$http', '$q', 'API_PREFIX',
-        'API_AUTH', 'API_COUNTRY_INFO', 'API_SEARCH'];
+        'API_AUTH', 'API_COUNTRY_INFO', 'API_SEARCH', 'API_NEIGHBOURS'];
 
     /* @ngInject */
-    function dataservice($http, $q, API_PREFIX, API_AUTH, API_COUNTRY_INFO, API_SEARCH) {
+    function dataservice($http, $q, API_PREFIX, API_AUTH, API_COUNTRY_INFO, API_SEARCH, API_NEIGHBOURS) {
 
         var service = {
             getCountries: getCountries,
-            getCountry: getCountry
+            getCountry: getCountry,
+            getNeighbours: getNeighbours
         };
 
         return service;
@@ -60,7 +61,7 @@
             return $http({
                     cache: true,
                     method: 'GET',
-                    url: API_PREFIX + API_NEIGHBOURS + '?geonameId=' + id + '&' + API_AUTH
+                    url: API_PREFIX + API_NEIGHBOURS + '?geonameId=' + id + '&isNameRequired=true&' + API_AUTH
                 })
                 .then(success)
                 .catch(fail);
