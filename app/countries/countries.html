@@ -11,7 +11,8 @@
             </tr>
             <tr ng-repeat="country in countryList">
                 <td>
-                    <a href="#/countries/{{country.countryName | slugify}}/capital">
+                    <a href="#/countries/{{country.countryCode}}/capital">
+                    <!-- <a href="#/countries/{{country.countryName | slugify}}/capital"> -->
                         {{country.countryName}}
                     </a>
                 </td>

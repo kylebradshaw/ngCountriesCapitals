@@ -31,9 +31,18 @@
 
         // do a request for getcountry, get geonameId, pass that to getNeighbours(), do whatever's next
         function getCountryData() {
-            dataservice.getCountry($routeParams.country)
+            dataservice.getCountryDetail($routeParams.country)
                 .then(function (data) {
                     $scope.country = data.geonames[0];
+                    dataservice.getCities(data.geonames[0].countryName)
+                        .then(function(data){
+                            $scope.capital = data.geonames[0];
+                        });
+                    //Turkey issue
+                    dataservice.getCountry(data.geonames[0].countryName)
+                        .then(function(data){
+                            $scope.detail = data.geonames[0];
+                        })
                     dataservice.getNeighbours(data.geonames[0].geonameId)
                         .then(function(data){
                             $scope.neighbourData = data.geonames;

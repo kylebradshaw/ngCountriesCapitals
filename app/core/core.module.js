@@ -4,7 +4,8 @@
     angular
         .module('app.core', [
             'ngRoute',
-            'ngAnimate'
+            'ngAnimate',
+            'ngMap'
         ])
         .constant('API_PREFIX', 'http://api.geonames.org')
         .constant('API_AUTH', 'username=somedirection')

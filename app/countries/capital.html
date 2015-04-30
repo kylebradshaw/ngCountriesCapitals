@@ -1,25 +1,24 @@
 <div class="row">
     <div class="col-sm-12">
-        <h2>{{country.countryName}}</h2>
         <div class="row">
             <div class="col-sm-6">
+                <h2>{{country.countryName}}</h2>
                 <dl>
                     <dt>Population of Country</dt>
                     <dd>{{country.population | humanNumber}}</dd>
                     <dt>Area km<sup>2</sup></dt>
-                    <dd></dd>
-                    <!-- <dt>{{country.areaInSqKm | humanNumber}}</dt> -->
+                    <dd>{{country.areaInSqKm | humanNumber}}</dd>
                     <dt>Capital</dt>
-                    <dd>{{country.capital}}</dd>
+                    <dd>{{capital.name}}</dd>
                     <dt>Population of Capital</dt>
-                    <dd></dd>
+                    <dd>{{capital.population | humanNumber}}</dd>
                     <dt>Lat / Lng</dt>
-                    <dd><a target="_blank" ng-href="https://www.google.com/maps/place/{{country.lat}}°00'00.0%22N+{{country.lng}}°00'00.0%22E">{{country.lng}}°, {{country.lat}}°</a></dd>
+                    <dd>{{detail.lat}}°, {{detail.lng}}°</dd>
                     <dt>{{results.length}} neighbours</dt>
                     <dd>
                         <ul class="neighbours">
                             <li ng-repeat="country in neighbourData | filter:query as results">
-                                <a href="#/countries/{{country.countryName | slugify}}/capital">
+                                <a href="#/countries/{{country.countryCode}}/capital">
                                     {{country.countryName}}
                                 </a>
                             </li>
@@ -27,15 +26,21 @@
                     </dd>
                 </dl>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 box">
                 <div ng-if="country.countryCode" class="country-image" ng-style="{'background-image':'url(http://www.geonames.org/flags/m/{{country.countryCode | lowercase}}.png)','background-repeat':'repeat'}">
                     <img ng-src="http://www.geonames.org/img/country/250/{{country.countryCode}}.png">
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <map center="{{detail.lat}}, {{detail.lng}}" zoom="6"></map>
+            </div>
+        </div>
     </div>
 </div>
-<pre>
+<pre style="display:none">
 {{country | json}}
+{{capital | json}}
 {{neighbourData | json}}
 </pre>

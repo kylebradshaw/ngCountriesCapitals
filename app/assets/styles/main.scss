@@ -6,6 +6,14 @@ header {
     min-height: 150px;
 }
 
+.box {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    min-height: 360px;
+}
+
 ul.neighbours {
     display: inline;
     padding: 0;
