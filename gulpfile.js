@@ -8,6 +8,7 @@ var uglify = require('gulp-uglify');
 var minifyHtml = require('gulp-minify-html');
 var minifyCss = require('gulp-minify-css');
 var rev = require('gulp-rev');
+var clean = require('gulp-clean');
 
 var paths = {
     scripts: [ 'app/**/*.js', '!app/bower_components/**/*.js' ],
@@ -60,7 +61,7 @@ gulp.task('sass', function (){
     .on('error', function(err){
         displayError(err);
     })
-    // Pass the compiled sass through the prefixer with defined 
+    // Pass the compiled sass through the prefixer with defined
     .pipe(prefix(
         'last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'
     ))
@@ -105,7 +106,7 @@ gulp.task('build', ['sass', 'copy', 'usemin']);
 
 // This is the default task - which is run when `gulp` is run
 // The tasks passed in as an array are run before the tasks within the function
-gulp.task('default', ['connect', 'sass'], function() { 
+gulp.task('default', ['connect', 'sass'], function() {
     // Watch the files in the paths object, and when there is a change, fun the functions in the array
     gulp.watch(paths.styles.files, ['sass'])
     // Also when there is a change, display what file was changed, only showing the path after the 'sass folder'
