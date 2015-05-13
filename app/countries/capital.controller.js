@@ -30,6 +30,7 @@
         getCountryData();
 
         // do a request for getcountry, get geonameId, pass that to getNeighbours(), do whatever's next
+        // do .then() chaining for promises
         function getCountryData() {
             dataservice.getCountryDetail($routeParams.country)
                 .then(function (data) {

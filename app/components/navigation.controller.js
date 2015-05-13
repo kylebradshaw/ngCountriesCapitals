@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.navigation')
+        .module('app.navigation', [])
         .controller('NavigationController', NavigationController);
 
     NavigationController.$inject = ['$scope', '$location', '$window'];
@@ -23,6 +23,10 @@
 
         $scope.goBack = function(){
             $window.history.back();
+        };
+
+        $scope.sayHello = function() {
+            return "Hello!";
         };
 
     }
